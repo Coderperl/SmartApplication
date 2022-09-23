@@ -39,7 +39,6 @@
 
   <ItemGroup>
     <Folder Include="MVVM\Views\" />
-    <Folder Include="Resources\" />
   </ItemGroup>
 
 </Project>

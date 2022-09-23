@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SmartApplication"
         xmlns:viewModels="clr-namespace:SmartApplication.MVVM.ViewModels"
+        xmlns:components="clr-namespace:SmartApplication.Components"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Background="Transparent"
@@ -24,8 +25,8 @@
 
         <ContentControl Grid.Row="0" Content="{Binding CurrentView}"/>
 
-        
-    </Grid>
+            <components:MainMenuBar Grid.Row="1" Margin="0 -1200 0 0"/>
+        </Grid>
 
 
 </Border>
