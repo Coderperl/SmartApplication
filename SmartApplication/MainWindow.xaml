@@ -13,6 +13,7 @@
         WindowStyle="None"
         AllowsTransparency="true"
         Title="KYHHome" Height="720" Width="1280">
+
     <Window.DataContext>
         <viewModels:MainViewModel/>
     </Window.DataContext>
@@ -26,7 +27,7 @@
 
         <ContentControl Grid.Row="0" Content="{Binding CurrentView}"/>
 
-            <components:MainMenuBar Grid.Row="1" Margin="0 -1200 0 0"/>
+            <components:MainMenuBar Grid.Row="0" Margin="1100 0 0 0"/>
         </Grid>
 
 

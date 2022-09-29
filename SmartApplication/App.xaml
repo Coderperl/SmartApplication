@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:SmartApplication"
              xmlns:viewModels="clr-namespace:SmartApplication.MVVM.ViewModels"
-             xmlns:view ="clr-namespace:SmartApplication.MVVM.Views"
+             xmlns:view ="clr-namespace:SmartApplication.MVVM"
+             xmlns:views="clr-namespace:SmartApplication.MVVM.Views"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
@@ -16,7 +17,13 @@
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type viewModels:KitchenViewModel}">
-                <view:KitchenView/>
+                <views:KitchenView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:BedRoomViewModel}">
+                <views:BedRoomView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:LivingRoomViewModel}">
+                <views:LivingRoomView/>
             </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>

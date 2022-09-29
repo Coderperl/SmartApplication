@@ -31,7 +31,11 @@ namespace SmartApplication.MVVM.ViewModels
         public object CurrentView
         {
             get { return _currentView; }
-            set { _currentView = value; OnPropertyChanged(); }
+            set
+            {
+                _currentView = value; 
+                OnPropertyChanged();
+            }
         }
     }
 }
