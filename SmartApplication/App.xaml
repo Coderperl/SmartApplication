@@ -2,15 +2,22 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:SmartApplication"
+             xmlns:viewModels="clr-namespace:SmartApplication.MVVM.ViewModels"
+             xmlns:view ="clr-namespace:SmartApplication.MVVM.Views"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Fonts.xaml"/>
                 <ResourceDictionary Source="Resources/Buttons.xaml"/>
-                <ResourceDictionary Source="Resources/MenuResource.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Resources/MenuResource.xaml"/>
+                <ResourceDictionary Source="Resources/Borders.xaml"/>
+                <ResourceDictionary Source="Resources/TileResources.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate DataType="{x:Type viewModels:KitchenViewModel}">
+                <view:KitchenView/>
+            </DataTemplate>
         </ResourceDictionary>
-         
     </Application.Resources>
 </Application>

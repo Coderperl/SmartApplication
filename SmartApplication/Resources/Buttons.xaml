@@ -27,7 +27,8 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    <Style x:Name="toggleButton" TargetType="ToggleButton">
+
+    <Style x:Key="toggleButton" TargetType="ToggleButton">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ToggleButton">

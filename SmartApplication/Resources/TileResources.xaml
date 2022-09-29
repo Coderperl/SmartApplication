@@ -1,0 +1,58 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style x:Key="tileToggleText" TargetType="TextBlock">
+        <Setter Property="HorizontalAlignment" Value="left"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="Margin" Value="0"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding ElementName=CheckBox, Path=IsChecked}" Value="true">
+                <Setter Property="Text" Value="On"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding ElementName=CheckBox, Path=IsChecked}" Value="false">
+                <Setter Property="Text" Value="Off"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="iconStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource FontAwesome-Solid}"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="FontSize" Value="40"/>
+        <Setter Property="Margin" Value="1"/>
+        <Setter Property="Text" Value="{Binding ElementName=tile, Path=InActiveIcon}" />
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding ElementName=CheckBox, Path=isChecked}" Value="true">
+                <Setter Property="Text" Value="{Binding ElementName=tile, Path=ActiveIcon}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding ElementName=CheckBox, Path=isChecked}" Value="false">
+                <Setter Property="Text" Value="{Binding ElementName=tile, Path=InActiveIcon}"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    
+    <Style x:Key="tileDeviceName" TargetType="TextBlock">
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Text" Value="{Binding ElementName=tile, Path=DeviceName}"/>
+    </Style>
+
+    <Style x:Key="tileDeviceType" TargetType="TextBlock">
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="Margin" Value="0 1 0 0"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Text" Value="{Binding ElementName=tile, Path=DeviceType}"/>
+    </Style>
+
+
+
+
+</ResourceDictionary>

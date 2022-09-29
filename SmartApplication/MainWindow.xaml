@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:SmartApplication"
         xmlns:viewModels="clr-namespace:SmartApplication.MVVM.ViewModels"
         xmlns:components="clr-namespace:SmartApplication.Components"
+
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Background="Transparent"

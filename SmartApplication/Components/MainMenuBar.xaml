@@ -5,9 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SmartApplication.Components"
              mc:Ignorable="d" 
-             d:DesignHeight="80" d:DesignWidth="720">
+             d:DesignHeight="700" d:DesignWidth="720">
     <Border Style="{StaticResource MenuButtonBar}">
-        <StackPanel Orientation="Horizontal">
+        <StackPanel Orientation="Vertical">
             <RadioButton Command="{Binding KitchenViewCommand}" Style="{StaticResource menuButton}" Content="&#xe51a;" IsChecked="True"/>
             <RadioButton Command="{Binding LivingRoomViewCommand}" Style="{StaticResource menuButton}" Content="&#xf236;"/>
             <RadioButton Command="{Binding BedRoomViewCommand}" Style="{StaticResource menuButton}" Content="&#xf4b8;"/>

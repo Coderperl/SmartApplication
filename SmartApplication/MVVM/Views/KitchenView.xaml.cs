@@ -13,29 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SmartApplication
+namespace SmartApplication.MVVM.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for KitchenView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class KitchenView : UserControl
     {
-        public MainWindow()
+        public KitchenView()
         {
             InitializeComponent();
-        }
-
-        private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ChangedButton == MouseButton.Left)
-            {
-                DragMove();
-            }
-        }
-
-        private void TitleBar_MouseDown_leftButtonMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            
         }
     }
 }
