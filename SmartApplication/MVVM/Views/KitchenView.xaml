@@ -70,7 +70,6 @@
                         </Grid.RowDefinitions>
 
                         <ItemsControl x:Name="deviceTileListView"
-                                      ItemsSource="{Binding DeviceItems}"
                                       Grid.Column="1" 
                                       Grid.Row="1">
                             <ItemsControl.ItemTemplate>

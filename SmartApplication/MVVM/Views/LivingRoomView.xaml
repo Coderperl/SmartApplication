@@ -6,11 +6,11 @@
              xmlns:local="clr-namespace:SmartApplication.MVVM.Views"
              xmlns:components="clr-namespace:SmartApplication.Components"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="720" d:DesignWidth="1280">
     <Border x:Name="LivingRoom" Style="{StaticResource pageBorder}">
         <Border CornerRadius="10">
             <Border.Background>
-                <ImageBrush Opacity="0.6" ImageSource="/Assets/Images/LivingRoom.jpg"/>
+                <ImageBrush Opacity="0.6" ImageSource="/Assets/Images/Livingroom3.jpg"/>
             </Border.Background>
 
             <Grid>
@@ -18,15 +18,13 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <!--<Button Grid.Row="0" x:Name="btnClose" Click="BtnClose_OnClick" Style="{StaticResource closeButton}"/>-->
-
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <StackPanel Grid.Column="0" Margin="60 0 0 0 " VerticalAlignment="Center" >
+                    <StackPanel Grid.Column="0" Margin="60 0 0 0 "  VerticalAlignment="Center" >
                         <TextBlock Text="{Binding Title}" FontSize="40" FontWeight="SemiBold" />
                         <Grid>
                             <Grid.RowDefinitions>
@@ -62,7 +60,7 @@
                     </StackPanel>
 
 
-                    <Grid Grid.Column="1" Margin="40 0 100 100" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <Grid Grid.Column="1" Margin="40 0 100 100" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>

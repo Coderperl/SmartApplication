@@ -11,7 +11,7 @@ namespace SmartApplication.MVVM.ViewModels
         private object _currentView;
         public RelayCommand KitchenViewCommand { get; set; }
         public RelayCommand BedRoomViewCommand { get; set; }
-        public RelayCommand LivingRoomRelayCommand { get; set; }
+        public RelayCommand LivingRoomViewCommand { get; set; }
         public KitchenViewModel KitchenViewModel { get; set; }
         public BedRoomViewModel BedRoomViewModel { get; set; }
         public LivingRoomViewModel LivingRoomViewModel { get; set; }
@@ -25,7 +25,7 @@ namespace SmartApplication.MVVM.ViewModels
 
             KitchenViewCommand = new RelayCommand(x => { CurrentView = KitchenViewModel; });
             BedRoomViewCommand = new RelayCommand(x => { CurrentView = BedRoomViewModel; });
-            LivingRoomRelayCommand = new RelayCommand(x => { CurrentView = LivingRoomViewModel; });
+            LivingRoomViewCommand = new RelayCommand(x => { CurrentView = LivingRoomViewModel; });
         }
 
         public object CurrentView

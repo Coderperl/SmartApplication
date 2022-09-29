@@ -18,8 +18,6 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <!--<Button Grid.Row="0" x:Name="btnClose" Click="BtnClose_OnClick" Style="{StaticResource closeButton}"/>-->
-
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -62,7 +60,7 @@
                     </StackPanel>
 
 
-                    <Grid Grid.Column="1" Margin="40 0 100 100" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <Grid Grid.Column="1" Margin="40 0 100 100" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>

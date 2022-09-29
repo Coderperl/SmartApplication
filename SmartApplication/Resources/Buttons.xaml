@@ -52,7 +52,7 @@
                                     <Storyboard>
                                         <ColorAnimation
                                             Storyboard.TargetName="toggleBackground"
-                                            Storyboard.TargetProperty="(Border.Background).SolidColorBrush.Color"
+                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
                                             To="#3ADC3A"
                                             Duration="0:0:0:0.1"/>
                                         <ThicknessAnimation 
@@ -68,7 +68,7 @@
                                     <Storyboard>
                                         <ColorAnimation
                                             Storyboard.TargetName="toggleBackground"
-                                            Storyboard.TargetProperty="(Border.Background).SolidColorBrush.Color"
+                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
                                             To="LightGray"
                                             Duration="0:0:0:0.1"/>
                                         <ThicknessAnimation 

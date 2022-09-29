@@ -25,10 +25,10 @@
         <Setter Property="Margin" Value="1"/>
         <Setter Property="Text" Value="{Binding ElementName=tile, Path=InActiveIcon}" />
         <Style.Triggers>
-            <DataTrigger Binding="{Binding ElementName=CheckBox, Path=isChecked}" Value="true">
+            <DataTrigger Binding="{Binding ElementName=CheckBox, Path=IsChecked}" Value="true">
                 <Setter Property="Text" Value="{Binding ElementName=tile, Path=ActiveIcon}"/>
             </DataTrigger>
-            <DataTrigger Binding="{Binding ElementName=CheckBox, Path=isChecked}" Value="false">
+            <DataTrigger Binding="{Binding ElementName=CheckBox, Path=IsChecked}" Value="false">
                 <Setter Property="Text" Value="{Binding ElementName=tile, Path=InActiveIcon}"/>
             </DataTrigger>
         </Style.Triggers>
