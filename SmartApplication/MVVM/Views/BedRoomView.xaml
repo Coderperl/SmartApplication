@@ -74,6 +74,7 @@
                         <components:Tile DeviceName="SmartBed" ActiveIcon="&#xf487;" InActiveIcon="&#xf011;" Grid.Row="1" Grid.Column="0"/>
                         <components:Tile DeviceName="Bruh" ActiveIcon="&#xf85e;" InActiveIcon="&#xf011;" Grid.Row="1" Grid.Column="1"/>
 
+
                     </Grid>
 
 

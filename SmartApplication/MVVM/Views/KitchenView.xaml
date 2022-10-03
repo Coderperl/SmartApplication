@@ -59,24 +59,39 @@
                         </Grid>
 
                     </StackPanel>
-                    <Grid Column="1">
+                    <Grid Grid.Column="1" Margin="40 0 100 100" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="400"/>
-                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
                         <ItemsControl x:Name="deviceTileListView"
                                       Grid.Column="1" 
-                                      Grid.Row="1">
+                                      Grid.Row="1"
+                                      ItemsSource="{Binding DeviceItems}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-
+                                <components:Tile
+                                    DeviceName="{Binding DeviceName}"
+                                    DeviceType="{Binding DeviceType}"
+                                    ActiveIcon="{Binding ActiveIcon}"
+                                    InActiveIcon="{Binding InactiveIcon}"
+                                    StateActive="{Binding StateActive}"
+                                    StateInactive="{Binding StateInactive}"
+                                    />
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
+                            
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+
                         </ItemsControl>
                     </Grid>
                 </Grid>

@@ -26,6 +26,8 @@ namespace SmartApplication.MVVM.ViewModels
             KitchenViewCommand = new RelayCommand(x => { CurrentView = KitchenViewModel; });
             BedRoomViewCommand = new RelayCommand(x => { CurrentView = BedRoomViewModel; });
             LivingRoomViewCommand = new RelayCommand(x => { CurrentView = LivingRoomViewModel; });
+
+            CurrentView = KitchenViewModel;
         }
 
         public object CurrentView
