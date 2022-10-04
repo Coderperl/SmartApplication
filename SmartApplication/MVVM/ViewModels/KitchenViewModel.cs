@@ -7,29 +7,27 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Threading;
 using Microsoft.Azure.Devices;
+using Microsoft.Azure.Devices.Shared;
 
 namespace SmartApplication.MVVM.ViewModels
 {
     internal class KitchenViewModel
     {
         private ObservableCollection<DeviceItem> _devices;
+        private ObservableCollection<TemperatureDevice> _temperatureDevices;
         private List<DeviceItem> _removeList = new();
         private DispatcherTimer _timer;
         private readonly RegistryManager _registryManager = RegistryManager.CreateFromConnectionString("HostName=CoderPer-IotHub.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=ma+LRFaad+UGhf/jh36X7aYMV2DlhsJ45OLbAnkzkrU=");
         public string Title { get; set; } = "Kitchen";
-        public string Temperature { get; set; } = "18";
-        public string TemperatureScale { get; set; } = "°C";
-        public string Humidity { get; set; } = "29";
-        public string HumidityScale { get; set; } = "%";
-        public List<DeviceItem> Devices { get; set; } = new List<DeviceItem>();
         public IEnumerable<DeviceItem> DeviceItems => _devices;
-
+        public IEnumerable<TemperatureDevice> TemperatureDevices => _temperatureDevices;
+        public NotifyTaskCompletion<TemperatureDevice> tempSensor { get; set; }
         public KitchenViewModel()
         {
             _devices = new ObservableCollection<DeviceItem>();
+            //tempSensor = new NotifyTaskCompletion<TemperatureDevice>(PopulateTemperatureSensor());
             PopulateDeviceListAsync().ConfigureAwait(false);
             setTimer(TimeSpan.FromSeconds(5));
-
         }
 
         private void setTimer(TimeSpan interval)
@@ -45,6 +43,7 @@ namespace SmartApplication.MVVM.ViewModels
         private async void timer_tick(object sender, EventArgs e)
         {
             await PopulateDeviceListAsync();
+            tempSensor = new NotifyTaskCompletion<TemperatureDevice>(PopulateTemperatureSensor());
             await UpdateDevicesAsync();
         }
         private async Task UpdateDevicesAsync()
@@ -53,7 +52,7 @@ namespace SmartApplication.MVVM.ViewModels
             foreach (var item in _devices)
             {
                 var device = await _registryManager.GetDeviceAsync(item.DeviceId);
-                if(device == null)
+                if (device == null)
                     _removeList.Add(item);
             }
 
@@ -63,10 +62,28 @@ namespace SmartApplication.MVVM.ViewModels
             }
         }
 
+        private async Task<TemperatureDevice> PopulateTemperatureSensor()
+        {
+            var result =
+                _registryManager.CreateQuery(
+                    "SELECT * FROM Devices WHERE properties.reported.deviceType = 'Sensor'");
+            var device = new TemperatureDevice();
+            foreach (var twin in await result.GetNextAsTwinAsync())
+            {
+                try { device.TemperatureValue = twin.Properties.Reported["temperature"]; }
+                catch { }
+                try { device.HumidityValue = twin.Properties.Reported["humidity"]; }
+                catch { }
+            }
+
+            return device;
+
+        }
+
         private async Task PopulateDeviceListAsync()
         {
             var result = _registryManager.CreateQuery("SELECT * FROM devices WHERE properties.reported.location = 'Kitchen'");
-            if(result.HasMoreResults)
+            if (result.HasMoreResults)
                 foreach (var twin in await result.GetNextAsTwinAsync())
                 {
                     var device = _devices.FirstOrDefault(x => x.DeviceId == twin.DeviceId);
@@ -77,8 +94,8 @@ namespace SmartApplication.MVVM.ViewModels
                             DeviceId = twin.DeviceId
                         };
                         try { device.DeviceName = twin.Properties.Reported["deviceName"]; }
-                        catch {device.DeviceName = device.DeviceId;}
-                        try{device.DeviceType = twin.Properties.Reported["deviceType"]; }
+                        catch { device.DeviceName = device.DeviceId; }
+                        try { device.DeviceType = twin.Properties.Reported["deviceType"]; }
                         catch { }
 
                         switch (device.DeviceType.ToLower())
@@ -104,7 +121,7 @@ namespace SmartApplication.MVVM.ViewModels
                         }
                         _devices.Add(device);
                     }
-                    else{}
+                    else { }
 
                 }
             else

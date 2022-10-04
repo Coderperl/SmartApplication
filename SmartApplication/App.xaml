@@ -14,6 +14,7 @@
                 <ResourceDictionary Source="Resources/MenuResource.xaml"/>
                 <ResourceDictionary Source="Resources/Borders.xaml"/>
                 <ResourceDictionary Source="Resources/TileResources.xaml"/>
+                <ResourceDictionary Source="Resources/TemperatureSensorResource.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type viewModels:KitchenViewModel}">

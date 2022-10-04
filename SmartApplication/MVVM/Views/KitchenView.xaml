@@ -24,7 +24,6 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="0" Margin="60 0 0 0" VerticalAlignment="Center">
-                        <TextBlock Text="{Binding Title}" FontSize="40" FontWeight="SemiBold"/>
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
@@ -36,29 +35,15 @@
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="0" Text="Temperature" Foreground="White" FontSize="14" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             <TextBlock Grid.Column="1" Text="Humidity" Foreground="White" FontSize="14" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            <TextBlock Foreground="Black" FontSize="33" Grid.Row="1"
-                                       Grid.Column="0"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       Width="80">
-                                <Run Text="{Binding Temperature}"/>
-                                <Run Text="{Binding TemperatureScale}"/>
+                            <TextBlock Grid.Row="1" Style="{StaticResource SensorTemperatureValue}">
+                                <Run Text="{Binding tempSensor.Result.TemperatureValue}"/>
                             </TextBlock>
-
-
-                            <TextBlock Foreground="Black"
-                                       Margin="40 0 0 0"
-                                       FontSize="33" Grid.Row="1"
-                                       Grid.Column="1"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       Width="80">
-                                <Run Text="{Binding Humidity}"/>
-                                <Run Text="{Binding HumidityScale}"/>
+                            <TextBlock Grid.Row="1" Grid.Column="1" Style="{StaticResource SensorHumidityValue}">
+                                <Run Text="{Binding tempSensor.Result.HumidityValue}"/>
                             </TextBlock>
                         </Grid>
-
                     </StackPanel>
+
                     <Grid Grid.Column="1" Margin="40 0 100 100" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -68,7 +53,7 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-
+                        
                         <ItemsControl x:Name="deviceTileListView"
                                       Grid.Column="1" 
                                       Grid.Row="1"
