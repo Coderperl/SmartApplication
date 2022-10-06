@@ -11,8 +11,8 @@
         </Setter>
     </Style>
     <Style x:Key="tileBorder" TargetType="Border" >
-        <Setter Property="Width" Value="150"/>
-        <Setter Property="Height" Value="150"/>
+        <Setter Property="Width" Value="200"/>
+        <Setter Property="Height" Value="200"/>
         <Setter Property="Background" Value="PapayaWhip"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="HorizontalAlignment" Value="Stretch"/>

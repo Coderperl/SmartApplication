@@ -24,6 +24,7 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="0" Margin="60 0 0 0" VerticalAlignment="Center">
+                        <TextBlock Text="{Binding Title}" FontSize="40" FontWeight="SemiBold"/>
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
@@ -36,10 +37,10 @@
                             <TextBlock Grid.Column="0" Text="Temperature" Foreground="White" FontSize="14" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             <TextBlock Grid.Column="1" Text="Humidity" Foreground="White" FontSize="14" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             <TextBlock Grid.Row="1" Style="{StaticResource SensorTemperatureValue}">
-                                <Run Text="{Binding tempSensor.Result.TemperatureValue}"/>
+                                <Run Text="{Binding temperatureDevice.TemperatureValue}"/>
                             </TextBlock>
                             <TextBlock Grid.Row="1" Grid.Column="1" Style="{StaticResource SensorHumidityValue}">
-                                <Run Text="{Binding tempSensor.Result.HumidityValue}"/>
+                                <Run Text="{Binding temperatureDevice.HumidityValue}"/>
                             </TextBlock>
                         </Grid>
                     </StackPanel>

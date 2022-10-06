@@ -76,7 +76,7 @@ namespace Temperature_Device
                     new
                     {
                         DeviceId = _deviceId, DeviceType = "Sensor", DeviceName = "KitchenThermometer",
-                        Location = "Kitchen", Owner = "Per" 
+                        Location = "KitchenEntrance", Owner = "Per" 
                     });
             }
 

@@ -82,5 +82,11 @@ namespace SmartApplication.Components
         {
             InitializeComponent();
         }
+
+
+        private void BtnRemoveDevice_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

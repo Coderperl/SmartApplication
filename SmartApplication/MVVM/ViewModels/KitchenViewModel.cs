@@ -11,21 +11,32 @@ using Microsoft.Azure.Devices.Shared;
 
 namespace SmartApplication.MVVM.ViewModels
 {
-    internal class KitchenViewModel
+    internal class KitchenViewModel : ObservableObject
     {
         private ObservableCollection<DeviceItem> _devices;
-        private ObservableCollection<TemperatureDevice> _temperatureDevices;
         private List<DeviceItem> _removeList = new();
         private DispatcherTimer _timer;
         private readonly RegistryManager _registryManager = RegistryManager.CreateFromConnectionString("HostName=CoderPer-IotHub.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=ma+LRFaad+UGhf/jh36X7aYMV2DlhsJ45OLbAnkzkrU=");
         public string Title { get; set; } = "Kitchen";
+
+        private TemperatureDevice _temperatureDevice = new TemperatureDevice();
+
+        public TemperatureDevice temperatureDevice
+        {
+            get => _temperatureDevice;
+            set
+            {
+                _temperatureDevice = value;
+                OnPropertyChanged();
+            }
+        }
+
+        
         public IEnumerable<DeviceItem> DeviceItems => _devices;
-        public IEnumerable<TemperatureDevice> TemperatureDevices => _temperatureDevices;
-        public NotifyTaskCompletion<TemperatureDevice> tempSensor { get; set; }
+        
         public KitchenViewModel()
         {
             _devices = new ObservableCollection<DeviceItem>();
-            //tempSensor = new NotifyTaskCompletion<TemperatureDevice>(PopulateTemperatureSensor());
             PopulateDeviceListAsync().ConfigureAwait(false);
             setTimer(TimeSpan.FromSeconds(5));
         }
@@ -43,7 +54,7 @@ namespace SmartApplication.MVVM.ViewModels
         private async void timer_tick(object sender, EventArgs e)
         {
             await PopulateDeviceListAsync();
-            tempSensor = new NotifyTaskCompletion<TemperatureDevice>(PopulateTemperatureSensor());
+            await PopulateTemperatureSensor();
             await UpdateDevicesAsync();
         }
         private async Task UpdateDevicesAsync()
@@ -66,17 +77,17 @@ namespace SmartApplication.MVVM.ViewModels
         {
             var result =
                 _registryManager.CreateQuery(
-                    "SELECT * FROM Devices WHERE properties.reported.deviceType = 'Sensor'");
-            var device = new TemperatureDevice();
+                    "SELECT * FROM Devices WHERE properties.reported.deviceName = 'KitchenThermometer'");
+            ;
             foreach (var twin in await result.GetNextAsTwinAsync())
             {
-                try { device.TemperatureValue = twin.Properties.Reported["temperature"]; }
+                try { temperatureDevice.TemperatureValue = twin.Properties.Reported["temperature"]; }
                 catch { }
-                try { device.HumidityValue = twin.Properties.Reported["humidity"]; }
+                try { temperatureDevice.HumidityValue = twin.Properties.Reported["humidity"]; }
                 catch { }
             }
 
-            return device;
+            return temperatureDevice;
 
         }
 

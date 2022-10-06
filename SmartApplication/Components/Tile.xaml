@@ -16,10 +16,13 @@
             <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
+                <Button Grid.Column="3" Content="x" Style="{StaticResource removeDeviceButton}" x:Name="btnRemoveDevice" Foreground="Black" Click="BtnRemoveDevice_OnClick" BorderThickness="0" Background="Transparent"/>
                 <TextBlock Style="{StaticResource tileToggleText}" Grid.Column="0"/>
-                <CheckBox x:Name="CheckBox" Grid.Column="1" Style="{StaticResource toggleButton}" 
+                <CheckBox x:Name="CheckBox" Grid.Column="3" Style="{StaticResource toggleButton}" 
                           HorizontalAlignment="Right" 
                           VerticalAlignment="Center">
 
@@ -29,6 +32,7 @@
                 <TextBlock Style="{StaticResource iconStyle}"/>
                 <TextBlock Style="{StaticResource tileDeviceName}"/>
                 <TextBlock Style="{StaticResource tileDeviceType}"/>
+                
             </StackPanel>
         </Grid>
     </Border>
