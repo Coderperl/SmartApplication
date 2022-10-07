@@ -15,10 +15,7 @@
                    VerticalAlignment="Center">
 
         </TextBlock>
-            <TextBlock x:Name="loopLog">
-
-            </TextBlock>
-        <!--<Button x:Name="btnConnect" Click="BtnConnect_OnClick" Content="Connect" Padding="10 5" Margin="0 20 0 0" ></Button>-->
+            <TextBlock x:Name="loopLog"/>
         </StackPanel>
     </Grid>
 </Window>

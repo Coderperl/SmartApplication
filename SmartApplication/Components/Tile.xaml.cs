@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Azure.Devices;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SmartApplication.MVVM.Models;
+using System.Data;
+using Dapper;
+using Microsoft.Data.SqlClient;
 
 namespace SmartApplication.Components
 {
@@ -20,6 +25,9 @@ namespace SmartApplication.Components
     /// </summary>
     public partial class Tile : UserControl
     {
+        private readonly RegistryManager _registryManager = RegistryManager.CreateFromConnectionString("HostName=CoderPer-IotHub.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=ma+LRFaad+UGhf/jh36X7aYMV2DlhsJ45OLbAnkzkrU=");
+        private readonly string _connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\pelle\\source\\repos\\SmartApplication\\KitchenLight_Device\\Data\\LightDevices.Db.mdf;Integrated Security=True;Connect Timeout=30";
+
         public static readonly DependencyProperty StateActiveProperty =
             DependencyProperty.Register("StateActive", typeof(string), typeof(Tile));
         public string StateActive
@@ -84,9 +92,16 @@ namespace SmartApplication.Components
         }
 
 
-        private void BtnRemoveDevice_OnClick(object sender, RoutedEventArgs e)
+        private async void BtnRemoveDevice_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            
+            var button = sender as Button;
+            var deviceItem = (DeviceItem) button!.DataContext;
+            btnRemoveDevice.IsEnabled = false;
+            await _registryManager.RemoveDeviceAsync(deviceItem.DeviceId);
+            using IDbConnection connection = new SqlConnection(_connectionString);
+            await connection.ExecuteAsync($"DELETE FROM Device_Information WHERE DeviceId = @DeviceId", new{DeviceId = deviceItem.DeviceId});
+
         }
     }
 }

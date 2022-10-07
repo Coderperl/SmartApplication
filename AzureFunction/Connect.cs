@@ -24,8 +24,7 @@ namespace AzureFunction
         {
             try
             {
-                var body = JsonConvert.DeserializeObject<DeviceRequest>(
-                    await new StreamReader(req.Body).ReadToEndAsync());
+                var body = JsonConvert.DeserializeObject<DeviceRequest>(await new StreamReader(req.Body).ReadToEndAsync());
                 var device = await _registryManager.AddDeviceAsync(new Device(body.DeviceId));
 
                 var connectionString =
