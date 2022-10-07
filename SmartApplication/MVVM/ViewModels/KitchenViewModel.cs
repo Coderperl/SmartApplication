@@ -30,8 +30,30 @@ namespace SmartApplication.MVVM.ViewModels
                 OnPropertyChanged();
             }
         }
+        private string _currentTemperature;
 
-        
+        public string CurrentTemperature
+        {
+            get { return _currentTemperature; }
+            set
+            {
+                _currentTemperature = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _currentHumidity;
+
+        public string CurrentHumidity
+        {
+            get { return _currentHumidity; }
+            set
+            {
+                _currentHumidity = value; 
+                OnPropertyChanged();
+            }
+        }
+
+
         public IEnumerable<DeviceItem> DeviceItems => _devices;
         
         public KitchenViewModel()
@@ -54,7 +76,7 @@ namespace SmartApplication.MVVM.ViewModels
         private async void timer_tick(object sender, EventArgs e)
         {
             await PopulateDeviceListAsync();
-            await PopulateTemperatureSensor();
+            PopulateTemperatureSensor();
             await UpdateDevicesAsync();
         }
         private async Task UpdateDevicesAsync()
@@ -73,7 +95,7 @@ namespace SmartApplication.MVVM.ViewModels
             }
         }
 
-        private async Task<TemperatureDevice> PopulateTemperatureSensor()
+        private async void PopulateTemperatureSensor()
         {
             var result =
                 _registryManager.CreateQuery(
@@ -87,7 +109,9 @@ namespace SmartApplication.MVVM.ViewModels
                 catch { }
             }
 
-            return temperatureDevice;
+            CurrentTemperature = temperatureDevice.TemperatureValue;
+            CurrentHumidity = temperatureDevice.HumidityValue;
+
 
         }
 

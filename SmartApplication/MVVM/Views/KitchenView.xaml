@@ -37,10 +37,10 @@
                             <TextBlock Grid.Column="0" Text="Temperature" Foreground="White" FontSize="14" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             <TextBlock Grid.Column="1" Text="Humidity" Foreground="White" FontSize="14" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             <TextBlock Grid.Row="1" Style="{StaticResource SensorTemperatureValue}">
-                                <Run Text="{Binding temperatureDevice.TemperatureValue}"/>
+                                <Run Text="{Binding CurrentTemperature}"/>
                             </TextBlock>
                             <TextBlock Grid.Row="1" Grid.Column="1" Style="{StaticResource SensorHumidityValue}">
-                                <Run Text="{Binding temperatureDevice.HumidityValue}"/>
+                                <Run Text="{Binding CurrentHumidity}"/>
                             </TextBlock>
                         </Grid>
                     </StackPanel>
