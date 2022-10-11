@@ -9,7 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KitchenTemperature_Device",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzureFunction", "AzureFunction\AzureFunction.csproj", "{DF032285-1E9B-4E74-BC0F-0FB3E22B65D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KitchenLight_Device", "KitchenLight_Device\KitchenLight_Device.csproj", "{801D91AC-4E37-4547-B923-7FD158B849C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KitchenLight_Device", "KitchenLight_Device\KitchenLight_Device.csproj", "{801D91AC-4E37-4547-B923-7FD158B849C8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LivingRoomTemperature_Device", "LivingRoomTemperature_Device\LivingRoomTemperature_Device.csproj", "{977EC3A0-A2ED-4A54-80E9-2154C15B7517}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LivingRoomFan_Device", "LivingRoomFan_Device\LivingRoomFan_Device.csproj", "{7CAAB494-6565-46AC-ABA0-EA1D5CE4EF5E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,14 @@ Global
 		{801D91AC-4E37-4547-B923-7FD158B849C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{801D91AC-4E37-4547-B923-7FD158B849C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{801D91AC-4E37-4547-B923-7FD158B849C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{977EC3A0-A2ED-4A54-80E9-2154C15B7517}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{977EC3A0-A2ED-4A54-80E9-2154C15B7517}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{977EC3A0-A2ED-4A54-80E9-2154C15B7517}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{977EC3A0-A2ED-4A54-80E9-2154C15B7517}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CAAB494-6565-46AC-ABA0-EA1D5CE4EF5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CAAB494-6565-46AC-ABA0-EA1D5CE4EF5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CAAB494-6565-46AC-ABA0-EA1D5CE4EF5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CAAB494-6565-46AC-ABA0-EA1D5CE4EF5E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
