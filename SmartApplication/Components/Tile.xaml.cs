@@ -17,6 +17,7 @@ using SmartApplication.MVVM.Models;
 using System.Data;
 using Dapper;
 using Microsoft.Data.SqlClient;
+using Newtonsoft.Json;
 
 namespace SmartApplication.Components
 {
@@ -25,7 +26,8 @@ namespace SmartApplication.Components
     /// </summary>
     public partial class Tile : UserControl
     {
-        private readonly RegistryManager _registryManager = RegistryManager.CreateFromConnectionString("HostName=CoderPer-IotHub.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=ma+LRFaad+UGhf/jh36X7aYMV2DlhsJ45OLbAnkzkrU=");
+        private static readonly string _iotHubConnectionString = "HostName=CoderPer-IotHub.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=ma+LRFaad+UGhf/jh36X7aYMV2DlhsJ45OLbAnkzkrU=";
+        private readonly RegistryManager _registryManager = RegistryManager.CreateFromConnectionString(_iotHubConnectionString);
         private readonly string _connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\pelle\\source\\repos\\SmartApplication\\KitchenLight_Device\\Data\\LightDevices.Db.mdf;Integrated Security=True;Connect Timeout=30";
 
         public static readonly DependencyProperty StateActiveProperty =
@@ -102,6 +104,22 @@ namespace SmartApplication.Components
             using IDbConnection connection = new SqlConnection(_connectionString);
             await connection.ExecuteAsync($"DELETE FROM Device_Information WHERE DeviceId = @DeviceId", new{DeviceId = deviceItem.DeviceId});
 
+        }
+
+        private async void CheckBoxOnOff_OnClick(object sender, RoutedEventArgs e)
+        {
+            CheckBoxOnOff.IsEnabled = false;
+            var checkbox = sender as CheckBox;
+            var deviceItem = (DeviceItem) checkbox!.DataContext;
+            if (IsChecked != null)
+            {
+                using ServiceClient serviceClient = ServiceClient.CreateFromConnectionString(_iotHubConnectionString);
+
+                var directMethod = new CloudToDeviceMethod("ChangedLightState");
+                //directMethod.SetPayloadJson(JsonConvert.SerializeObject(new { lightState = IsChecked }));
+                var result = await serviceClient.InvokeDeviceMethodAsync(deviceItem.DeviceId, directMethod);
+            }
+            CheckBoxOnOff.IsEnabled = true;
         }
     }
 }

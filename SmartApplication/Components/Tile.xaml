@@ -22,7 +22,7 @@
             </Grid.ColumnDefinitions>
                 <Button Grid.Column="3" Content="x" Style="{StaticResource removeDeviceButton}" x:Name="btnRemoveDevice" Foreground="Black" Click="BtnRemoveDevice_OnClick" BorderThickness="0" Background="Transparent"/>
                 <TextBlock Style="{StaticResource tileToggleText}" Grid.Column="0"/>
-                <CheckBox x:Name="CheckBox" Grid.Column="3" Style="{StaticResource toggleButton}" 
+                <CheckBox x:Name="CheckBoxOnOff" Click="CheckBoxOnOff_OnClick" Grid.Column="3" Style="{StaticResource toggleButton}" 
                           HorizontalAlignment="Right" 
                           VerticalAlignment="Center">
 

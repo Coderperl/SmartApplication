@@ -15,12 +15,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Azure.Core;
 using Dapper;
 using KitchenLight_Device.Models;
 using Microsoft.Azure.Devices.Client;
 using Microsoft.Azure.Devices.Shared;
 using Microsoft.Data.SqlClient;
 using Newtonsoft.Json;
+using SmartApplication.MVVM;
 
 namespace KitchenLight_Device
 {
@@ -32,9 +34,9 @@ namespace KitchenLight_Device
         private DeviceClient _deviceClient;
         private readonly string _ApiUrl = "http://localhost:7177/api/devices/connect";
         private readonly string _connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\pelle\\source\\repos\\SmartApplication\\KitchenLight_Device\\Data\\LightDevices.Db.mdf;Integrated Security=True;Connect Timeout=30";
-        private int _Intervall = 1000;
-        private bool _lightstate = true;
-        private bool _previouslightState = false;
+        private int _Intervall = 5000; 
+        public bool _lightstate { get; set; }
+        private bool _previouslightState { get; set; } = false;
         private bool _connected = false;
         private string _deviceId = "";
         private DeviceInformation _deviceInformation;
@@ -93,6 +95,9 @@ namespace KitchenLight_Device
             }
             _deviceClient = DeviceClient.CreateFromConnectionString(deviceConnectionString);
 
+            var twin = await _deviceClient.GetTwinAsync();
+            
+
             tbConnectingMessage.Text = "Updating Device Twin Properties, Please Wait.....";
 
             _deviceInformation = await connection.QueryFirstOrDefaultAsync<DeviceInformation>(
@@ -103,10 +108,12 @@ namespace KitchenLight_Device
             twinCollection["deviceType"] = _deviceInformation.DeviceType;
             twinCollection["owner"] = _deviceInformation.Owner;
             twinCollection["location"] = _deviceInformation.Location;
-            twinCollection["lightState"] = _lightstate;
+            _lightstate = twin.Properties.Reported["lightState"];
             twinCollection["previousLightState"] = _previouslightState;
 
             await _deviceClient.UpdateReportedPropertiesAsync(twinCollection);
+
+            await _deviceClient.SetMethodHandlerAsync("ChangedLightState", ChangedLightState, _deviceClient);
 
             _connected = true;
             tbConnectingMessage.Text = "Device Connected.";
@@ -118,25 +125,26 @@ namespace KitchenLight_Device
             {
                 if (_connected)
                 {
+                    var twin =  await _deviceClient.GetTwinAsync();
+                    _lightstate = twin.Properties.Reported["lightState"];
+                    LightState.Text = _lightstate.ToString();
                     if (_lightstate != _previouslightState)
                     {
+                        //_lightstate = !_lightstate;
+                        //_previouslightState = _lightstate;
+                        ////d2c device 2 cloud
+                        //var json = JsonConvert.SerializeObject(new { lightState = _lightstate });
+                        //var message = new Message(Encoding.UTF8.GetBytes(json));
+                        //message.Properties.Add("deviceName", _deviceInformation.DeviceName);
+                        //message.Properties.Add("deviceType", _deviceInformation.DeviceType);
+                        //message.Properties.Add("owner", _deviceInformation.Owner);
+                        //message.Properties.Add("location", _deviceInformation.Location);
 
-                        _lightstate = !_lightstate;
-                        //d2c device 2 cloud
-                        var json = JsonConvert.SerializeObject(new { lightState = _lightstate });
-                        var message = new Message(Encoding.UTF8.GetBytes(json));
-                        message.Properties.Add("deviceName", _deviceInformation.DeviceName);
-                        message.Properties.Add("deviceType", _deviceInformation.DeviceType);
-                        message.Properties.Add("owner", _deviceInformation.Owner);
-                        message.Properties.Add("location", _deviceInformation.Location);
-
-                        await _deviceClient.SendEventAsync(message);
-                        tbConnectingMessage.Text = $"Message sent at {DateTime.Now}.";
-                        //device twin reported
-                        var twinCollection = new TwinCollection();
-                        twinCollection["lightState"] = _lightstate;
-                        twinCollection["previousLightState"] = null;
-                        await _deviceClient.UpdateReportedPropertiesAsync(twinCollection);
+                        //await _deviceClient.SendEventAsync(message);
+                        ////device twin reported
+                        //var twinCollection = new TwinCollection();
+                        //twinCollection["lightState"] = _lightstate;
+                        //await _deviceClient.UpdateReportedPropertiesAsync(twinCollection);
                     }
                 }
                 await Task.Delay(_Intervall);
@@ -144,22 +152,42 @@ namespace KitchenLight_Device
 
         }
 
-        private void BtnOnOff_OnClick(object sender, RoutedEventArgs e)
+        private async Task UpdateLightState(string request = null)
         {
-            
-            if (!_lightstate)
+            if (request.Equals("null"))
             {
-                btnOnOff.Content = "Turn On";
-                LightOnOf.Text = "The light is on.";
+                _lightstate = !_lightstate;
             }
             else
             {
-                btnOnOff.Content = "Turn Off";
-                LightOnOf.Text = "The light is off.";
+                var result = JsonConvert.DeserializeObject<LightStateModel>(request);
+                _lightstate = result.State;
             }
-            _lightstate = !_lightstate;
-            _previouslightState = _lightstate;
 
+            var twinCollection = new TwinCollection();
+            twinCollection["lightState"] = _lightstate;
+            try
+            {
+                await _deviceClient.UpdateReportedPropertiesAsync(twinCollection);
+
+            }
+            catch (Exception e)
+            {
+
+            }
+        }
+        private async Task<MethodResponse> ChangedLightState(MethodRequest request, object userContext)
+        {
+            try
+            {
+                await UpdateLightState(request.DataAsJson);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            
+            return await Task.FromResult(new MethodResponse(new byte[0], 200));
         }
     }
 }

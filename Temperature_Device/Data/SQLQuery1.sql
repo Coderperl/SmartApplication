@@ -4,8 +4,6 @@ DeviceType nvarchar(max) not null,
 DeviceName nvarchar(max) null,
 Location nvarchar(max) null,
 Owner nvarchar(max) null,
-Temperature nvarchar(max) null,
-Humidity nvarchar(max) null,
 ConnectionString nvarchar(max) null
 )
 

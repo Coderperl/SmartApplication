@@ -15,8 +15,12 @@
                        VerticalAlignment="Center">
 
             </TextBlock>
-            <TextBlock x:Name="LightOnOf"/>
-            <Button x:Name="btnOnOff" Click="BtnOnOff_OnClick" Content="Turn On" Padding="10 5" Margin="0 20 0 0" HorizontalAlignment="Center"/>
+            <TextBlock x:Name="LightOnOf" />
+            <WrapPanel>
+                <TextBlock Text="lightState:"/>
+                <TextBlock x:Name="LightState"/>
+            </WrapPanel>
+           
         </StackPanel>
     </Grid>
 </Window>
